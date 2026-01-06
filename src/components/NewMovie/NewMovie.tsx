@@ -39,20 +39,12 @@ export const NewMovie: React.FC<Props> = ({ onAdd }) => {
     setCount(prevCount => prevCount + 1);
   };
 
-  const handleTitleChange = (newValue: string) =>
-    setMovie(prev => ({ ...prev, title: newValue }));
-
-  const handleDescriptionChange = (newValue: string) =>
-    setMovie(prev => ({ ...prev, description: newValue }));
-
-  const handleImgUrlChange = (newValue: string) =>
-    setMovie(prev => ({ ...prev, imgUrl: newValue }));
-
-  const handleImdbUrlChange = (newValue: string) =>
-    setMovie(prev => ({ ...prev, imdbUrl: newValue }));
-
-  const handleImdbIdChange = (newValue: string) =>
-    setMovie(prev => ({ ...prev, imdbId: newValue }));
+  const handleChange = (name: string) => (value: string) => {
+    setMovie(prevMovie => ({
+      ...prevMovie,
+      [name]: value,
+    }));
+  };
 
   return (
     <form
@@ -67,7 +59,7 @@ export const NewMovie: React.FC<Props> = ({ onAdd }) => {
         name="title"
         label="Title"
         value={movie.title}
-        onChange={handleTitleChange}
+        onChange={handleChange('title')}
         required
       />
 
@@ -75,32 +67,29 @@ export const NewMovie: React.FC<Props> = ({ onAdd }) => {
         name="description"
         label="Description"
         value={movie.description}
-        onChange={handleDescriptionChange}
+        onChange={handleChange('description')}
       />
-
       <TextField
         name="imgUrl"
         label="Image URL"
         value={movie.imgUrl}
-        onChange={handleImgUrlChange}
+        onChange={handleChange('imgUrl')}
         required
         validate={(value: string) => urlPattern.test(value.trim())}
       />
-
       <TextField
         name="imdbUrl"
         label="Imdb URL"
         value={movie.imdbUrl}
-        onChange={handleImdbUrlChange}
+        onChange={handleChange('imdbUrl')}
         required
         validate={(value: string) => urlPattern.test(value.trim())}
       />
-
       <TextField
         name="imdbId"
         label="Imdb ID"
         value={movie.imdbId}
-        onChange={handleImdbIdChange}
+        onChange={handleChange('imdbId')}
         required
       />
 
