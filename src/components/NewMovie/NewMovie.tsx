@@ -26,7 +26,7 @@ export const NewMovie: React.FC<Props> = ({ onAdd }) => {
     movie.imgUrl,
     movie.imdbUrl,
     movie.imdbId,
-  ].every(v => v.trim() !== '');
+  ].every(value => value.trim() !== '');
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -36,14 +36,7 @@ export const NewMovie: React.FC<Props> = ({ onAdd }) => {
     }
 
     onAdd(movie);
-    setMovie({
-      title: '',
-      description: '',
-      imgUrl: '',
-      imdbUrl: '',
-      imdbId: '',
-    });
-    setCount(c => c + 1);
+    setCount(prevCount => prevCount + 1);
   };
 
   const handleTitleChange = (newValue: string) =>
